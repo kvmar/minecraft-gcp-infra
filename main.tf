@@ -22,6 +22,7 @@ locals {
 
   enable_switch_access_group = 0
   minecraft_switch_access_group = ""
+  url_to_docker_file = "https://raw.githubusercontent.com/novayammygang/minecraft-gcp-infra/main/Dockerfiles/RAD/Dockerfile"
 }
 
 
@@ -65,7 +66,7 @@ resource "google_compute_instance" "minecraft" {
   #  docker exec -i mc rcon-cli
   # Once in rcon-cli you can "op <player_id>" to make someone an operator (admin)
   # Use 'sudo journalctl -u google-startup-scripts.service' to retrieve the startup script output
-  metadata_startup_script = "sudo su;wget https://raw.githubusercontent.com/novayammygang/minecraft-gcp-infra/main/Dockerfiles/RAD/Dockerfile -o Dockerfile;docker build kumarak2/rad-mc-server .;docker run -p 25565:25565 -v /var/minecraft:/data --name mc kumarak2/rad-mc-server:latest"
+  metadata_startup_script = "sudo su;cd /home/;curl ${local.url_to_docker_file} -o Dockerfile;docker build -t kumarak2/rad-mc-server .;docker run -p 25565:25565 -v /var/minecraft:/data --name mc kumarak2/rad-mc-server:latest"
 
   metadata = {
     enable-oslogin = "TRUE"
