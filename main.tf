@@ -54,7 +54,7 @@ resource "google_compute_address" "minecraft" {
 # VM to run Minecraft, we use preemptable which will shutdown within 24 hours
 resource "google_compute_instance" "minecraft" {
   name         = "minecraft"
-  machine_type = "n1-standard-2"
+  machine_type = "n1-standard-4"
   zone         = local.zone
   tags         = ["minecraft"]
 
@@ -65,7 +65,7 @@ resource "google_compute_instance" "minecraft" {
   #  docker exec -i mc rcon-cli
   # Once in rcon-cli you can "op <player_id>" to make someone an operator (admin)
   # Use 'sudo journalctl -u google-startup-scripts.service' to retrieve the startup script output
-  metadata_startup_script = "docker run -d -it -p 25565:25565 -v /srv/forge-rad:/srv/forge-rad ghcr.io/jmlemmi/forge-radmod-docker;"
+  metadata_startup_script = "sudo su;wget https://raw.githubusercontent.com/novayammygang/minecraft-gcp-infra/main/Dockerfiles/RAD/Dockerfile -o Dockerfile;docker build kumarak2/rad-mc-server .;docker run -p 25565:25565 -v /var/minecraft:/data --name mc kumarak2/rad-mc-server:latest"
 
   metadata = {
     enable-oslogin = "TRUE"
