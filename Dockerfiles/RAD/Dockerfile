@@ -10,7 +10,7 @@ RUN unzip RAD-Serverpack-1.49.zip
 
 # Second stage: the container
 FROM openjdk:8u292-oraclelinux7
-COPY --from=builder /tmp/RAD-Serverpack-1.4.9/ /srv/forge-rad
+COPY --from=builder /tmp/RAD-Serverpack-1.49/ /srv/forge-rad
 
 WORKDIR /srv/forge-rad
 EXPOSE 25565
