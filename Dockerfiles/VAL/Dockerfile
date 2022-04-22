@@ -5,19 +5,17 @@ WORKDIR /tmp/
 
 # Downloading server-files and unpacking them.
 # Since its zip it cannot be unpacked by ADD
-ADD https://edge.forgecdn.net/files/3723/369/Valhelsia%20Enhanced%20Vanilla-1.1.2-SERVER.zip server.zip
-RUN unzip server.zip
+ADD https://edge.forgecdn.net/files/3723/369/Valhelsia%20Enhanced%20Vanilla-1.1.2-SERVER.zip "Valhelsia+Enhanced+Vanilla-1.1.2-SERVER.zip"
+RUN unzip Valhelsia+Enhanced+Vanilla-1.1.2-SERVER.zip -d server
 
 # Second stage: the container
-FROM openjdk:8u292-oraclelinux7
-COPY --from=builder /tmp/server.zip/ /srv/forge-val
+FROM openjdk:18
+COPY --from=builder /tmp/server/ /srv/forge-val
 
-WORKDIR /srv/forge-rad
+WORKDIR /srv/forge-val
 EXPOSE 25565
 
-#aut-accept EULA
-RUN rm eula.txt && echo "eula=true" > eula.txt
-
 RUN chmod 744 ServerStart.sh
+RUN echo "eula=true" > eula.txt
 RUN yum install screen -y
 CMD screen -S MC ./ServerStart.sh
