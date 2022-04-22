@@ -8,6 +8,9 @@ WORKDIR /tmp/
 ADD https://edge.forgecdn.net/files/3723/369/Valhelsia%20Enhanced%20Vanilla-1.1.2-SERVER.zip "Valhelsia+Enhanced+Vanilla-1.1.2-SERVER.zip"
 RUN unzip Valhelsia+Enhanced+Vanilla-1.1.2-SERVER.zip -d server
 
+FROM openjdk:8u292-oraclelinux7
+RUN yum install screen -y
+
 # Second stage: the container
 FROM openjdk:18
 COPY --from=builder /tmp/server/ /srv/forge-val
@@ -17,5 +20,4 @@ EXPOSE 25565
 
 RUN chmod 744 ServerStart.sh
 RUN echo "eula=true" > eula.txt
-RUN yum install screen -y
 CMD screen -S MC ./ServerStart.sh
