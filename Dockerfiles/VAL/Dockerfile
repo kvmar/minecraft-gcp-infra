@@ -5,8 +5,8 @@ WORKDIR /tmp/
 
 # Downloading server-files and unpacking them.
 # Since its zip it cannot be unpacked by ADD
-ADD https://edge.forgecdn.net/files/3723/369/Valhelsia%20Enhanced%20Vanilla-1.1.2-SERVER.zip "Valhelsia+Enhanced+Vanilla-1.1.2-SERVER.zip"
-RUN unzip Valhelsia+Enhanced+Vanilla-1.1.2-SERVER.zip -d server
+ADD https://edge.forgecdn.net/files/3707/304/Valhelsia%203-3.5.1-SERVER.zip "Valhelsia+3-3.5.1-SERVER.zip"
+RUN unzip Valhelsia+3-3.5.1-SERVER.zip -d server
 
 # Second stage: the container
 FROM openjdk:18-oraclelinux7
