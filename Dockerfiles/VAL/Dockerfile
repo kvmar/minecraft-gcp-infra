@@ -9,7 +9,8 @@ ADD https://edge.forgecdn.net/files/3707/304/Valhelsia%203-3.5.1-SERVER.zip "Val
 RUN unzip Valhelsia+3-3.5.1-SERVER.zip -d server
 
 # Second stage: the container
-FROM openjdk:18-oraclelinux7
+FROM openjdk:8u292-oraclelinux7
+
 COPY --from=builder /tmp/server/ /srv/forge-val
 
 WORKDIR /srv/forge-val
