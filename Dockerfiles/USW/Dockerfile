@@ -6,7 +6,7 @@ WORKDIR /tmp/
 # Downloading server-files and unpacking them.
 # Since its zip it cannot be unpacked by ADD
 ADD https://api.papermc.io/v2/projects/paper/versions/1.19.2/builds/237/downloads/paper-1.19.2-237.jar paper.jar
-ADD "https://www.dl.dropboxusercontent.com/s/a5oo98bdiu3bqhx/server_pack.zip?dl=0" server_pack.zip
+ADD "https://www.dl.dropboxusercontent.com/s/wa3816ntzruayqt/server_pack.zip?dl=0" server_pack.zip
 RUN unzip server_pack.zip
 
 # Second stage: the container
