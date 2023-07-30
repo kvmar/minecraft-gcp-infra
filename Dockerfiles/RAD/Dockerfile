@@ -20,4 +20,4 @@ RUN rm eula.txt && echo "eula=true" > eula.txt
 
 RUN chmod 744 LaunchServer.sh
 RUN yum install screen -y
-CMD screen -S MC java -Xms8048m -Xmx12096m -XX:PermSize=256m -jar forge-1.12.2-14.23.5.2859.jar nogui
+CMD screen -S MC java -Xms8048m -Xmx12096m -XX:PermSize=256m -jar forge-1.16.5-36.2.39.jar nogui
