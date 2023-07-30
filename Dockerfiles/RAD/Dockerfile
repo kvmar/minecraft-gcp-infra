@@ -5,12 +5,12 @@ WORKDIR /tmp/
 
 # Downloading server-files and unpacking them.
 # Since its zip it cannot be unpacked by ADD
-ADD https://edge.forgecdn.net/files/3579/961/RAD-Serverpack-1.49.zip RAD-Serverpack-1.49.zip
-RUN unzip RAD-Serverpack-1.49.zip
+ADD https://www.curseforge.com/api/v1/mods/572778/files/4653048/download RAD2-Serverpack-1.5.zip
+RUN unzip RAD2-Serverpack-1.5
 
 # Second stage: the container
 FROM openjdk:8u292-oraclelinux7
-COPY --from=builder /tmp/RAD-Serverpack-1.49/ /srv/forge-rad
+COPY --from=builder /tmp/RAD2-Serverpack-1.5/ /srv/forge-rad
 
 WORKDIR /srv/forge-rad
 EXPOSE 25565
